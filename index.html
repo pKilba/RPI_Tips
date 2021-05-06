@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="tips_style.css">
+    <title>Tips</title>
+</head>
+<body class="body">
+<section class="main-section">
+    <section class="tips-container" id="tips-container">
+        <div class="tips__header">
+            Tips:
+            <a class="tips__close-butt" onclick="hideTips()">&#9587</a>
+        </div>
+        <section class="tips__info" id="info"></section>
+        <div class="tips__management">
+            <div class="tips__checkbox-container">
+                <input class="tips__checkbox" id="checkbox" type="checkbox">
+                <label for="checkbox">Disable Tips</label>
+            </div>
+            <div class="tips__navigation">
+                <a class="tips__prev-button" onclick="setNextTip(-1)">&#10094</a>
+                <section class="tips__dots" id="dots"></section>
+                <a class="tips__next-button" onclick="setNextTip(1)">&#10095</a>
+            </div>
+        </div>
+    </section>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
