@@ -3,6 +3,8 @@ let containerForTips = document.getElementById("tipsContainer");
 let isTipsHidden = false;
 let curTipIndex = 0;
 const DISABLETIPS = document.getElementById('checkbox1');    
+const leftMove= document.getElementById('tipsPrevButton');
+const rightMove= document.getElementById('tipsNextButton');
 let tipsArr;
 let dotsArr;
 
@@ -35,6 +37,12 @@ function tipsHidden(){
     }
     
 }
+
+rightMove.addEventListener('click',function(){
+    nextTip(1);})
+leftMove.addEventListener('click',function(){
+    nextTip(-1);
+} );
 
 
 DISABLETIPS.addEventListener('click', function () {
