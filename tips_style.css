@@ -11,6 +11,12 @@ body{
     justify-content: space-between;
 }
 
+.textHeade{
+    display: flex;
+    justify-content: space-between;
+   margin-left: auto;
+   margin-right: auto;
+}
 .tipsHeader {
     width: 100%;
     display: flex;

@@ -2,25 +2,19 @@ const TIME = 5000;
 let containerForTips = document.getElementById("tipsContainer");
 let isTipsHidden = false;
 let curTipIndex = 0;
-const DISABLETIPS = document.getElementById('checkbox1');    
+const DISABLETIPS = document.getElementById('checkbox');    
 const leftMove= document.getElementById('tipsPrevButton');
 const rightMove= document.getElementById('tipsNextButton');
+const closeButton = document.getElementById('tipsCloseButt');
 let tipsArr;
 let dotsArr;
-
 
 const infoTips = [
     'Oh, you can’t help that, we’re all mad here.',
     'Off with their heads!.',
     'Sometimes I’ve believed as many as six impossible things before breakfast.',
     ' Every adventure requires a first step.'
-
 ];
-
-
-function showTipMenu(){
-    containerForTips.style.display = "flex";
-}
 
 tipsHidden();
 
@@ -38,17 +32,23 @@ function tipsHidden(){
     
 }
 
+tipsCloseButt.addEventListener('click',function(){
+    hideTips();})
+
 rightMove.addEventListener('click',function(){
     nextTip(1);})
+
 leftMove.addEventListener('click',function(){
     nextTip(-1);
 } );
-
 
 DISABLETIPS.addEventListener('click', function () {
     localStorage.setItem('is_hidden', this.checked);
 });
 
+function showTipMenu(){
+    containerForTips.style.display = "flex";
+}
 
 function hideTips() {
     containerForTips.style.display = "none";
@@ -79,7 +79,6 @@ function showTip(tipIndex) {
     tipsArr[curTipIndex].style.display = "block";
     dotsArr[curTipIndex].className += " active";
 }
-
 
 function checkCurrentTipIndex(tipIndex, tipsArr) {
     if (tipIndex >= tipsArr.length) {
