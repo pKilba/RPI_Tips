@@ -1,41 +1,63 @@
-const tipsArray = ["Shortcuts can help save you precious time. Just go to the ‘Shortcuts’ dialog in the Customize menu.",
-    "Sometimes you realize a split second too late that you shouldn’t have closed that tab. That’s why Chrome lets you bring it back with a few simple key strokes.",
-    "You can group tabs to keep related pages together in one workspace. To create a tab group, just right-click any tab and select Add tab to new group."];
+const TIME = 5000;
+let containerForTips = document.getElementById("tipsContainer");
+let isTipsHidden = false;
+let curTipIndex = 0;
+const DISABLETIPS = document.getElementById('checkbox1');    
+let tipsArr;
+let dotsArr;
 
 
-let curTipIndex = localStorage.getItem("cur_tip_index") === null ? 0 : parseInt(localStorage.getItem("cur_tip_index"));
-let isTipsHidden = localStorage.getItem("is_hidden") === null ? false : localStorage.getItem("is_hidden") === "true";
-let tipsContainer = document.getElementById("tips-container");
+const infoTips = [
+    'Oh, you can’t help that, we’re all mad here.',
+    'Off with their heads!.',
+    'Sometimes I’ve believed as many as six impossible things before breakfast.',
+    ' Every adventure requires a first step.'
 
-let tipsArr, dotsArr;
+];
 
-if (!isTipsHidden) {
-    setTimeout(function () {
-        tipsContainer.style.display = "flex";
-    }, 5000);
-    initTipsAndDotsSection();
-    showTip(curTipIndex);
-    addEventListener("keydown", handlePress);
+
+function showTipMenu(){
+    containerForTips.style.display = "flex";
 }
 
+tipsHidden();
+
+function tipsHidden(){
+    if (!isTipsHidden) {
+        if(  localStorage.getItem('is_hidden') !== 'true') 
+        {
+        isTipsHidden= true;
+        setTimeout(showTipMenu, TIME);
+        initTipsAndDotsSection();
+        showTip(0);
+        addEventListener("keydown", handlePress);
+        }
+    }
+    
+}
+
+
+DISABLETIPS.addEventListener('click', function () {
+    localStorage.setItem('is_hidden', this.checked);
+});
+
+
 function hideTips() {
-    let checkbox = document.getElementById("checkbox");
-    localStorage.setItem("is_hidden", checkbox.checked.toString())
-    tipsContainer.style.display = "none";
+    containerForTips.style.display = "none";
 }
 
 function initTipsAndDotsSection() {
     let tipsInfo = document.getElementById("info");
     let dotsSection = document.getElementById("dots");
-    for (let i = 0; i < tipsArray.length; i++) {
-        tipsInfo.insertAdjacentHTML('beforeend', '<div class="tips__tip-data fade">' + tipsArray[i] + '</div>');
-        dotsSection.insertAdjacentHTML('beforeend', '<span class="dot" onclick="setTip(' + (tipsArray.length - 1 - i) + ')"></span>');
+    for (let i = 0; i < infoTips.length; i++) {
+        tipsInfo.insertAdjacentHTML('beforeend', '<div class="tipsTipData fade">' + infoTips[i] + '</div>');
+        dotsSection.insertAdjacentHTML('beforeend', '<span class="dot" onclick="setTip(' + (infoTips.length - 1 - i) + ')"></span>');
     }
-    tipsArr = document.getElementsByClassName("tips__tip-data");
+    tipsArr = document.getElementsByClassName("tipsTipData");
     dotsArr = document.getElementsByClassName("dot");
 }
 
-function setNextTip(offset) {
+function nextTip(offset) {
     showTip(curTipIndex += offset);
 }
 
@@ -44,20 +66,18 @@ function setTip(tipIndex) {
 }
 
 function showTip(tipIndex) {
-
     checkCurrentTipIndex(tipIndex, tipsArr);
     resetDisplayStyle(tipsArr, dotsArr);
-
     tipsArr[curTipIndex].style.display = "block";
     dotsArr[curTipIndex].className += " active";
-    localStorage.setItem("cur_tip_index", curTipIndex.toString());
 }
 
 
 function checkCurrentTipIndex(tipIndex, tipsArr) {
     if (tipIndex >= tipsArr.length) {
         curTipIndex = 0;
-    } else if (tipIndex < 0) {
+    } 
+    else if (tipIndex < 0) {
         curTipIndex = tipsArr.length - 1;
     }
 }
@@ -72,10 +92,10 @@ function resetDisplayStyle(tipsArr, dotsArr) {
 function handlePress(e) {
     switch (e.key) {
         case "ArrowLeft":
-            setNextTip(-1);
+            nextTip(-1);
             break;
         case "ArrowRight":
-            setNextTip(1);
+            nextTip(+1);
             break;
         case "Escape":
             hideTips();

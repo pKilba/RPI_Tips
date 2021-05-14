@@ -5,27 +5,25 @@
     <link rel="stylesheet" href="tips_style.css">
     <title>Tips</title>
 </head>
-<body class="body">
-<section class="main-section">
-    <section class="tips-container" id="tips-container">
-        <div class="tips__header">
+<body >
+        <div class="tipsContainer" id="tipsContainer">
+        <div class="tipsHeader">
             Tips:
-            <a class="tips__close-butt" onclick="hideTips()">&#9587</a>
+            <a class="tipsCloseButt" onclick="hideTips()">&#9587</a>
         </div>
-        <section class="tips__info" id="info"></section>
-        <div class="tips__management">
-            <div class="tips__checkbox-container">
-                <input class="tips__checkbox" id="checkbox" type="checkbox">
-                <label for="checkbox">Disable Tips</label>
+        <div class="tipsInfo" id="info"></div>
+        <div class="tipsManagement">
+            <div class="tipsCheckboxContainer">
+            <input id="checkbox1" type="checkbox">
+            <label for="checkbox">Disable Tips</label>
             </div>
-            <div class="tips__navigation">
-                <a class="tips__prev-button" onclick="setNextTip(-1)">&#10094</a>
-                <section class="tips__dots" id="dots"></section>
-                <a class="tips__next-button" onclick="setNextTip(1)">&#10095</a>
+            <div class="tipsNavigation">
+                <a class="tipsPrevButton" onclick="nextTip(-1)">&#10094</a>
+                <div class="tipsDots" id="dots"></div>
+                <a class="tipsNextButton" onclick="nextTip(1)">&#10095</a>
             </div>
         </div>
-    </section>
-</section>
+    </div>
 
 <script src="script.js"></script>
 </body>
